@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu May  9 20:15:47 2019
+
+@author: auesro
+"""
+import numpy as np
+
+
+angles = np.array([45, 90, 135, 180, 195, 270])
+temp = [[np.sin(np.pi/180*x), np.cos(np.pi/180*x)] for x in angles] # note that sin is [0] and cos is [1]
+
+# reproduces original angles
+#np.array([np.arctan2(x[0], x[1])*180/np.pi for x in temp])%360
+## array([ 45.,  90., 135., 180., 270.])
+#
+approach1 = np.array([np.arctan2(x[0], x[1])*180/np.pi + 90 for x in temp])
+#approach2 = np.array([-np.arctan2(x[1], x[0])*180/np.pi for x in temp])
+#
+## what new angles should be...
+#angles + 90
+## array([135, 180, 225, 270, 360])
+#approach1%360
+## array([135., 180., 225., 270., 360.])
+#approach2%360
+## array([315., 360.,  45.,  90., 180.])
+#(approach2+180)%360
+## array([135., 180., 225., 270.,   0.])
